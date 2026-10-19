@@ -151,3 +151,20 @@ Stage Summary:
 - Countdown flash sale kini SSR-safe (tidak lagi memakai Date.now() pada render awal).
 - Fitur flash sale aktif kembali dengan 3 produk promo dan countdown berjalan.
 - Artefak: src/lib/serialize.ts (formatDateID), src/components/juragan/articles-section.tsx, src/components/juragan/flash-sale.tsx, data saleEndsAt di DB.
+---
+Task ID: readme-bilingual-1
+Agent: Z.ai Code (main)
+Task: Buat README kelas dunia bilingual (ID + EN) dengan full design & standar internasional
+
+Work Log:
+- Fase riset: baca worklog.md, package.json, prisma/schema.prisma, 4 API routes, cek .env, hitung komponen (48 ui + 19 domain), verifikasi skrip npm.
+- Arsitektur: README.md (ID, versi utama) + README.en.md (EN, terjemahan setara 1:1), saling tertaut via language badges.
+- Struktur 18 section standar internasional: hero + badges, TOC ber-anchor, metodologi riset 20 website, fitur terstruktur, arsitektur Mermaid (flowchart + ERD), tech stack + rationale, quick start, skrip, API reference lengkap (4 endpoint dengan curl + contoh response nyata), data model, project tree, design system, SEO arsenal, AI capabilities, QA, roadmap, kontribusi, lisensi, acknowledgments.
+- Diagram Mermaid native GitHub: system flowchart (Client → Next.js → Prisma/SQLite + AI layer) dan ERD 5 model.
+- Semua data diverifikasi dari source asli: 31 SKU, 20 merk, 4 JSON-LD, quote JK-TVBF7VBA, tier pricing Rp 3.412.800, skrip package.json 1:1.
+- Audit akurasi: koreksi "20 komponen domain" → 19 (hasil hitung ulang). "45+ ui" divalidasi (48 aktual).
+- Verifikasi akhir: paritas 587 baris = 587 baris (ID/EN), lint bersih.
+
+Stage Summary:
+- README.md (ID) + README.en.md (EN) selesai — standar internasional dengan badges, Mermaid diagrams, API docs lengkap, dan data 100% akurat dari kode sumber.
+- Language switcher mutual di kedua file; format siap render sempurna di GitHub.
