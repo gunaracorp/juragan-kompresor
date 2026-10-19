@@ -2,6 +2,14 @@
   "name": "nextjs_tailwind_shadcn_ts",
   "version": "0.2.1",
   "private": true,
+  "author": {
+    "name": "Gugun Gunara",
+    "url": "https://www.instagram.com/prabudanling"
+  },
+  "contributors": [
+    { "name": "Muhammad Lutfi Azmi", "url": "https://digiman.id" }
+  ],
+  "support": "PT Top Konsultan Internasional (topkonsultan.web.id) × PT Digital Bisnis Manajemen (digiman.id)",
   "scripts": {
     "dev": "next dev -p 3000 2>&1 | tee dev.log",
     "build": "next build && cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/",

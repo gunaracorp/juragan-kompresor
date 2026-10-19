@@ -2,11 +2,12 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { BookOpen, Clock, CalendarDays, X } from 'lucide-react'
+import { BookOpen, Clock, CalendarDays, X, PenLine } from 'lucide-react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { formatDateID } from '@/lib/serialize'
+import { FOUNDER, SUPPORT_COMPANIES } from '@/lib/branding'
 import type { Article } from '@/lib/types'
 import SectionHeading from './section-heading'
 
@@ -69,6 +70,10 @@ export default function ArticlesSection({ articles }: { articles: Article[] }) {
               <h3 className="mt-3.5 text-base font-extrabold leading-snug text-zinc-900 transition-colors group-hover:text-orange-700">
                 {a.title}
               </h3>
+              <p className="mt-1.5 flex items-center gap-1.5 text-[11px] font-bold text-zinc-500">
+                <PenLine className="h-3 w-3 text-orange-500" aria-hidden="true" />
+                oleh {FOUNDER.name}
+              </p>
               <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground">{a.excerpt}</p>
               <div className="mt-5 flex items-center justify-between border-t border-zinc-100 pt-4">
                 <span className="flex items-center gap-1.5 text-[11px] font-semibold text-zinc-400">
@@ -106,6 +111,15 @@ export default function ArticlesSection({ articles }: { articles: Article[] }) {
                 <DialogDescription className="text-left text-sm leading-relaxed text-muted-foreground">
                   {open.excerpt}
                 </DialogDescription>
+                <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] font-semibold text-zinc-500">
+                  <span className="inline-flex items-center gap-1">
+                    <PenLine className="h-3 w-3 text-orange-500" aria-hidden="true" /> Oleh <strong className="text-zinc-700">{FOUNDER.name}</strong>
+                  </span>
+                  <span aria-hidden="true">·</span>
+                  <span>{formatDateID(open.publishedAt)}</span>
+                  <span aria-hidden="true">·</span>
+                  <span>Didukung {SUPPORT_COMPANIES.map((c) => c.legalName).join(' & ')}</span>
+                </p>
               </DialogHeader>
               <ArticleBody content={open.content} />
               <div className="mt-2 rounded-2xl bg-orange-50 p-4 text-sm font-semibold text-orange-800">

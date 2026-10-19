@@ -1,7 +1,20 @@
 'use client'
 
-import { Fan, MapPin, Phone, Mail, Clock, Instagram, Facebook, Youtube, MessageCircle } from 'lucide-react'
+import { Fan, MapPin, Phone, Mail, Clock, Instagram, Facebook, Youtube, MessageCircle, Building2, Crown } from 'lucide-react'
 import { useJuragan } from '@/lib/store'
+import { FOUNDER, CO_ENGINEER, SOCIALS, SUPPORT_COMPANIES } from '@/lib/branding'
+import { XIcon, TikTokIcon, ThreadsIcon } from './brand-icons'
+
+function SocialIcon({ icon, className }: { icon: string; className?: string }) {
+  switch (icon) {
+    case 'instagram': return <Instagram className={className} />
+    case 'facebook': return <Facebook className={className} />
+    case 'x': return <XIcon className={className} />
+    case 'tiktok': return <TikTokIcon className={className} />
+    case 'threads': return <ThreadsIcon className={className} />
+    default: return null
+  }
+}
 
 const CATEGORY_LINKS = [
   { label: 'Kompresor Rotary (Rumahan)', pk: 'k1' },
@@ -118,6 +131,77 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Kredit & branding — by Gugun Gunara */}
+        <div className="mt-10 rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.05] to-transparent p-6 sm:p-8" aria-label="Kredit pembuat dan pendukung">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+            <div>
+              <p className="inline-flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-[0.25em] text-orange-500">
+                <Crown className="h-3.5 w-3.5" /> Dibangun Oleh
+              </p>
+              <p className="mt-2 text-xl font-extrabold tracking-tight text-white sm:text-2xl">
+                by{' '}
+                <a
+                  href={SOCIALS[0].url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-gradient-to-r from-orange-400 via-amber-400 to-orange-400 bg-clip-text text-transparent transition hover:from-orange-300 hover:to-amber-300"
+                >
+                  {FOUNDER.name}
+                </a>
+              </p>
+              <p className="mt-1.5 text-xs leading-relaxed text-zinc-400">
+                Master Polymath · Sage Universal · The Ultimate Problem Solver — bersama{' '}
+                <span className="font-bold text-zinc-200">{CO_ENGINEER.name}</span>
+              </p>
+              <p className="mt-1 text-[11px] font-semibold text-zinc-500">
+                alias: prabudanling · santri angon
+              </p>
+            </div>
+
+            {/* Sosial media founder */}
+            <div>
+              <p className="mb-2.5 text-[10px] font-extrabold uppercase tracking-[0.25em] text-zinc-500">Ikuti Juragan</p>
+              <div className="flex flex-wrap gap-2">
+                {SOCIALS.map((s) => (
+                  <a
+                    key={s.label}
+                    href={s.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${FOUNDER.name} di ${s.label} (${s.handle})`}
+                    title={`${s.label} — ${s.handle}`}
+                    className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 text-zinc-400 transition hover:-translate-y-0.5 hover:bg-orange-600 hover:text-white"
+                  >
+                    <SocialIcon icon={s.icon} className="h-4.5 w-4.5" />
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Perusahaan pendukung */}
+          <div className="mt-6 flex flex-col gap-3 border-t border-white/10 pt-5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-8">
+            {SUPPORT_COMPANIES.map((c) => (
+              <a
+                key={c.legalName}
+                href={c.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2.5 text-xs"
+                title={`${c.legalName} — ${c.role}`}
+              >
+                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-orange-600/15 text-orange-400 transition group-hover:bg-orange-600 group-hover:text-white">
+                  <Building2 className="h-4 w-4" />
+                </span>
+                <span>
+                  <span className="block font-extrabold text-zinc-200 transition group-hover:text-orange-400">{c.legalName}</span>
+                  <span className="block text-[10px] font-semibold text-zinc-500">{c.url.replace('https://', '')} · {c.role}</span>
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+
         {/* Pembayaran & kirim */}
         <div className="mt-12 flex flex-wrap items-center justify-center gap-2 border-t border-white/10 pt-6 text-[11px] font-bold">
           {['QRIS', 'Transfer Bank', 'COD Jabodetabek', 'Cicilan 0%', 'Same-Day Delivery', 'Asuransi Kirim'].map((b) => (
@@ -130,7 +214,9 @@ export default function Footer() {
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-5 text-center text-xs sm:flex-row sm:px-6 sm:text-left">
           <p>© 2025 PT Juragan Kompresor Nusantara. Seluruh hak cipta dilindungi.</p>
           <p className="text-zinc-500">
-            Diracik dengan <span className="text-orange-500">♥</span> oleh 46 Dewan Pakar — dari hulu ke hilir pendinginan Indonesia.
+            Diracik dengan <span className="text-orange-500">♥</span> oleh <strong className="text-zinc-300">Gugun Gunara</strong> —
+            didukung <a href="https://topkonsultan.web.id" target="_blank" rel="noopener noreferrer" className="font-semibold text-zinc-400 underline-offset-2 transition hover:text-orange-400 hover:underline">PT Top Konsultan Internasional</a> ×{' '}
+            <a href="https://digiman.id" target="_blank" rel="noopener noreferrer" className="font-semibold text-zinc-400 underline-offset-2 transition hover:text-orange-400 hover:underline">digiman.id</a>
           </p>
         </div>
       </div>

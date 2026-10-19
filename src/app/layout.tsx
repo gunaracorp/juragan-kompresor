@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Plus_Jakarta_Sans, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { Toaster } from '@/components/ui/sonner'
+import { FOUNDER, CO_ENGINEER, BRAND_KEYWORDS } from '@/lib/branding'
 
 const jakarta = Plus_Jakarta_Sans({
   variable: '--font-jakarta',
@@ -29,10 +30,14 @@ export const metadata: Metadata = {
     'kompresor danfoss', 'kompresor bitzer', 'kompresor inverter r32', 'sparepart ac',
     'harga kompresor ac', 'kompresor ac murah', 'toko kompresor ac jakarta', 'kompresor rotary',
     'kompresor scroll', 'kompresor piston', 'servis kompresor ac', 'juragan kompresor',
+    ...BRAND_KEYWORDS,
   ],
-  authors: [{ name: 'Juragan Kompresor' }],
-  creator: 'Juragan Kompresor',
-  publisher: 'Juragan Kompresor',
+  authors: [
+    { name: FOUNDER.name, url: 'https://www.instagram.com/prabudanling' },
+    { name: CO_ENGINEER.name, url: 'https://digiman.id' },
+  ],
+  creator: FOUNDER.name,
+  publisher: 'PT Top Konsultan Internasional',
   category: 'shopping',
   alternates: { canonical: '/' },
   openGraph: {

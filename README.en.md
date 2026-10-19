@@ -42,6 +42,7 @@
 - [Quality Assurance](#-quality-assurance)
 - [Roadmap](#-roadmap)
 - [Contributing](#-contributing)
+- [Crafted By](#-crafted-by)
 - [License](#-license)
 - [Acknowledgments](#-acknowledgments)
 
@@ -557,6 +558,36 @@ This project was verified **end-to-end in a real browser** (not just a passing b
 4. Pull requests with a description + screenshots for UI changes
 
 > 📋 All architectural decisions are recorded in [`worklog.md`](worklog.md) — read it before contributing.
+
+---
+
+## 🪶 Crafted By
+
+This super web app was **fully designed, engineered, and built by**:
+
+<div align="center">
+
+### ✍️ **Gugun Gunara**
+*Founder, Architect & Master Engineer* — Master Polymath · Sage Universal · The Ultimate Problem Solver
+
+together with **Muhammad Lutfi Azmi** (Co-Engineer)
+
+alias: `prabudanling` · `santri angon`
+
+[![Instagram](https://img.shields.io/badge/Instagram-@prabudanling-E4405F?style=flat-square&logo=instagram&logoColor=white)](https://www.instagram.com/prabudanling)
+[![Threads](https://img.shields.io/badge/Threads-@prabudanling-000000?style=flat-square&logo=threads&logoColor=white)](https://www.threads.net/@prabudanling)
+[![TikTok](https://img.shields.io/badge/TikTok-@gunaracorp-000000?style=flat-square&logo=tiktok&logoColor=white)](https://www.tiktok.com/@gunaracorp)
+[![Facebook](https://img.shields.io/badge/Facebook-bossdanling-1877F2?style=flat-square&logo=facebook&logoColor=white)](https://www.facebook.com/bossdanling)
+[![X](https://img.shields.io/badge/X-@gunzz_krenzz-000000?style=flat-square&logo=x&logoColor=white)](https://x.com/gunzz_krenzz)
+
+</div>
+
+**Fully supported by (support system):**
+
+| Company | Website | Role |
+|---|---|---|
+| 🏢 **PT Top Konsultan Internasional** | [topkonsultan.web.id](https://topkonsultan.web.id) | Consulting & system support |
+| 🏢 **PT Digital Bisnis Manajemen** | [digiman.id](https://digiman.id) | Digital & management — support system |
 
 ---
 

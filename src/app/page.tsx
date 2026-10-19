@@ -1,6 +1,7 @@
 import { db } from '@/lib/db'
 import { serializeProduct, serializeArticle } from '@/lib/serialize'
 import type { Product } from '@/lib/types'
+import { FOUNDER, CO_ENGINEER, FOUNDER_SAME_AS, SUPPORT_COMPANIES } from '@/lib/branding'
 import TopBar from '@/components/juragan/top-bar'
 import Navbar from '@/components/juragan/navbar'
 import Hero from '@/components/juragan/hero'
@@ -63,7 +64,72 @@ export default async function Home() {
       areaServed: 'ID',
       availableLanguage: ['id'],
     },
-    sameAs: ['https://instagram.com/juragankompresor', 'https://facebook.com/juragankompresor'],
+    sameAs: ['https://instagram.com/juragankompresor', 'https://facebook.com/juragankompresor', ...FOUNDER_SAME_AS],
+    founder: {
+      '@type': 'Person',
+      name: FOUNDER.name,
+      alternateName: [...FOUNDER.aliases],
+      jobTitle: FOUNDER.jobTitle,
+    },
+    foundedBy: { '@id': `${SITE_URL}/#gugun-gunara` },
+  }
+
+  /* Knowledge Graph: sang pembuat + perusahaan pendukung (nama naik di Google) */
+  const brandGraphJsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Person',
+        '@id': `${SITE_URL}/#gugun-gunara`,
+        name: FOUNDER.name,
+        alternateName: [...FOUNDER.aliases],
+        jobTitle: FOUNDER.jobTitle,
+        description:
+          'Master polymath, arsitek & engineer super web app Juragan Kompresor — platform penjualan kompresor AC #1 Indonesia. Dikenal juga sebagai prabudanling & santri angon.',
+        knowsAbout: [...FOUNDER.knowsAbout],
+        worksFor: { '@id': `${SITE_URL}/#pt-top-konsultan-internasional` },
+        sameAs: [...FOUNDER_SAME_AS],
+      },
+      {
+        '@type': 'Person',
+        '@id': `${SITE_URL}/#muhammad-lutfi-azmi`,
+        name: CO_ENGINEER.name,
+        jobTitle: CO_ENGINEER.role,
+        description: 'Co-engineer Juragan Kompresor, mewakili PT Digital Bisnis Manajemen (digiman.id) sebagai support system.',
+        worksFor: { '@id': `${SITE_URL}/#pt-digital-bisnis-manajemen` },
+        sameAs: ['https://digiman.id'],
+      },
+      ...SUPPORT_COMPANIES.map((c) => ({
+        '@type': 'Organization',
+        '@id': `${SITE_URL}/#${c.legalName.toLowerCase().replace(/\s+/g, '-')}`,
+        name: c.legalName,
+        alternateName: c.name,
+        url: c.url,
+        description: `${c.legalName} — ${c.role} untuk platform Juragan Kompresor.`,
+        foundedBy: c.legalName === 'PT Top Konsultan Internasional' ? { '@id': `${SITE_URL}/#gugun-gunara` } : undefined,
+      })),
+    ],
+  }
+
+  /* BlogPosting: atribusi penulis artikel → nama ikut muncul di rich results Google */
+  const blogPostingJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Kompresorpedia — Artikel Edukasi Kompresor',
+    itemListElement: articles.map((a, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: {
+        '@type': 'BlogPosting',
+        headline: a.title,
+        description: a.excerpt,
+        datePublished: a.publishedAt,
+        inLanguage: 'id-ID',
+        author: { '@id': `${SITE_URL}/#gugun-gunara` },
+        publisher: { '@id': `${SITE_URL}/#organization` },
+        mainEntityOfPage: SITE_URL,
+      },
+    })),
   }
 
   const websiteJsonLd = {
@@ -74,6 +140,7 @@ export default async function Home() {
     url: SITE_URL,
     description: 'Toko kompresor AC original terlengkap di Indonesia.',
     publisher: { '@id': `${SITE_URL}/#organization` },
+    creator: { '@id': `${SITE_URL}/#gugun-gunara` },
     potentialAction: {
       '@type': 'SearchAction',
       target: { '@type': 'EntryPoint', urlTemplate: `${SITE_URL}/?q={search_term_string}` },
@@ -127,6 +194,8 @@ export default async function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(brandGraphJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingJsonLd) }} />
 
       <TopBar />
       <Navbar />

@@ -168,3 +168,23 @@ Work Log:
 Stage Summary:
 - README.md (ID) + README.en.md (EN) selesai — standar internasional dengan badges, Mermaid diagrams, API docs lengkap, dan data 100% akurat dari kode sumber.
 - Language switcher mutual di kedua file; format siap render sempurna di GitHub.
+---
+Task ID: branding-1
+Agent: Z.ai Code (main)
+Task: Branding menyeluruh "by Gugun Gunara" + tim & PT pendukung — arsitektur 8 lapis untuk SEO nama di Google
+
+Work Log:
+- Buat src/lib/branding.ts (single source of truth): FOUNDER (Gugun Gunara + alias prabudanling/santri angon/gunaracorp), CO_ENGINEER (Muhammad Lutfi Azmi), SOCIALS 5 platform, SUPPORT_COMPANIES (PT Top Konsultan Internasional/topkonsultan.web.id, PT Digital Bisnis Manajemen/digiman.id), BRAND_KEYWORDS.
+- Buat src/components/juragan/brand-icons.tsx: SVG resmi X, TikTok, Threads (simple-icons CC0, fill currentColor).
+- layout.tsx: metadata.authors (Gugun + IG url, Lutfi + digiman.id), creator = Gugun Gunara, publisher = PT Top Konsultan Internasional, keywords += 9 nama brand.
+- page.tsx JSON-LD: (1) Organization.founder + foundedBy + sameAs 5 sosial; (2) brandGraph @graph = Person Gugun (@id, alternateName, jobTitle, knowsAbout, worksFor, sameAs) + Person Lutfi + Organization 2 PT; (3) BlogPosting ItemList 6 artikel dengan author @id → rich results; WebSite.creator → Person. Total 6 JSON-LD script.
+- footer.tsx: blok kredit "Dibangun Oleh — by Gugun Gunara" (gradient text) + alias + 5 ikon sosial hover-lift + kartu 2 PT pendukung dengan link dofollow; bottom bar credit update.
+- articles-section.tsx: atribusi "oleh Gugun Gunara" di setiap kartu artikel + baris penulis/tanggal/pendukung di dialog artikel (E-E-A-T).
+- README.md + README.en.md: section "Dibuat Oleh / Crafted By" dengan social badges shields.io + tabel PT pendukung; TOC diperbarui.
+- package.json: author (Gugun Gunara) + contributors (Lutfi) + support field.
+- Verifikasi browser: 0 error, console bersih, 6 JSON-LD ter-render, @graph berisi 4 entitas Person/Organization, 8 link eksternal dofollow benar (IG/Threads/TikTok/FB/X/topkonsultan/digiman), atribusi artikel tampil, screenshot footer OK, lint bersih.
+
+Stage Summary:
+- Branding "by Gugun Gunara" kini menembus 8 lapisan: visible footer + artikel, metadata API, JSON-LD Knowledge Graph (Person+Org+sameAs), BlogPosting schema, README×2, package.json.
+- Semua nama (Gugun Gunara, Muhammad Lutfi Azmi, prabudanling, santri angon) + perusahaan (topkonsultan.web.id, digiman.id) terstruktur SEO-ready untuk Knowledge Graph Google.
+- Single source of truth di src/lib/branding.ts — mudah diubah tanpa sentuh banyak file.
