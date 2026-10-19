@@ -133,3 +133,21 @@ Work Log:
 
 Stage Summary:
 - PROYEK SELESAI. JURAGAN KOMPRESOR live di preview panel (route /).
+---
+Task ID: fix-hydration-1
+Agent: Z.ai Code (main)
+Task: Perbaiki hydration mismatch pada ArticlesSection (tanggal artikel) + audit komponen SSR-unsafe lainnya
+
+Work Log:
+- Diagnosa error: `new Date(a.publishedAt).toLocaleDateString('id-ID', ...)` di articles-section.tsx:75 tanpa timeZone eksplisit → server (UTC) render "19 Oktober", browser (WIB) render "20 Oktober" → hydration mismatch.
+- Tambahkan helper `formatDateID()` deterministik di src/lib/serialize.ts: parsing ISO ber-Z (spec-defined), offset +7 jam (WIB) via aritmetika epoch, tanpa timezone lokal/ICU → hasil server & client selalu identik.
+- Ganti pemanggilan toLocaleDateString di articles-section.tsx dengan formatDateID().
+- Audit komponen lain: temukan risiko hydration kedua di useCountdown (flash-sale.tsx) yang memakai `useState(() => Date.now())` → detik SSR vs client hampir pasti beda. Perbaiki dengan state awal `null` + inisialisasi via requestAnimationFrame callback (async, lolos rule react-hooks/set-state-in-effect).
+- Temukan flash sale section hilang: tidak ada produk dengan saleEndsAt aktif di DB. Set saleEndsAt = now+8h untuk 3 produk diskon terlaris (Daikin JT90, Panasonic 2V47W, LG QK163HAG) via script Prisma.
+- Verifikasi browser (agent-browser): 0 page errors, console bersih (tanpa hydration warning), tanggal artikel konsisten "20 Oktober 2026", flash sale tampil, countdown live berdetak 07:59:37 → 07:59:35, lint bersih.
+
+Stage Summary:
+- Hydration mismatch tuntas: tanggal artikel kini deterministik + akurat WIB di server & client.
+- Countdown flash sale kini SSR-safe (tidak lagi memakai Date.now() pada render awal).
+- Fitur flash sale aktif kembali dengan 3 produk promo dan countdown berjalan.
+- Artefak: src/lib/serialize.ts (formatDateID), src/components/juragan/articles-section.tsx, src/components/juragan/flash-sale.tsx, data saleEndsAt di DB.

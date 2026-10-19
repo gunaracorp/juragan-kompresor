@@ -6,6 +6,7 @@ import { BookOpen, Clock, CalendarDays, X } from 'lucide-react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { formatDateID } from '@/lib/serialize'
 import type { Article } from '@/lib/types'
 import SectionHeading from './section-heading'
 
@@ -72,7 +73,7 @@ export default function ArticlesSection({ articles }: { articles: Article[] }) {
               <div className="mt-5 flex items-center justify-between border-t border-zinc-100 pt-4">
                 <span className="flex items-center gap-1.5 text-[11px] font-semibold text-zinc-400">
                   <CalendarDays className="h-3.5 w-3.5" />
-                  {new Date(a.publishedAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
+                  {formatDateID(a.publishedAt)}
                 </span>
                 <Button
                   variant="ghost"

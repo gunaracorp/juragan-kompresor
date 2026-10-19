@@ -10,14 +10,21 @@ import type { Product } from '@/lib/types'
 import { useJuragan } from '@/lib/store'
 
 function useCountdown(target: string | null) {
-  const [now, setNow] = useState(() => Date.now())
+  // Mulai dari null supaya render awal server & client identik
+  // (Date.now() di render awal menyebabkan hydration mismatch pada detik).
+  // Nilai asli diisi via rAF/interval callback, bukan sinkron di body effect.
+  const [now, setNow] = useState<number | null>(null)
   useEffect(() => {
-    if (!target) return
+    const raf = requestAnimationFrame(() => setNow(Date.now()))
+    if (!target) return () => cancelAnimationFrame(raf)
     const id = setInterval(() => setNow(Date.now()), 1000)
-    return () => clearInterval(id)
+    return () => {
+      cancelAnimationFrame(raf)
+      clearInterval(id)
+    }
   }, [target])
   return useMemo(() => {
-    if (!target) return null
+    if (!target || now === null) return null
     const diff = Math.max(0, new Date(target).getTime() - now)
     const h = Math.floor(diff / 3600000)
     const m = Math.floor((diff % 3600000) / 60000)
